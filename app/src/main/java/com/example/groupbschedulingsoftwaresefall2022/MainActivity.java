@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private mySQLiteDBHandler dbHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
