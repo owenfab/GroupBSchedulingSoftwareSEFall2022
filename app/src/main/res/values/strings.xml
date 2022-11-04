@@ -12,4 +12,5 @@
   <string name="e_mall_address">E-mall address</string>
     <string name="password">Password</string>
     <string name="log_in">Log in</string>
+  <string name="scheduleme">ScheduleMe!</string>
 </resources>
