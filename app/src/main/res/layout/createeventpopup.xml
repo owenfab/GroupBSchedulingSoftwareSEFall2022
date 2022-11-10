@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/PopupLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/evName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:hint="Enter Event Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <EditText
+            android:id="@+id/evDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter Event Date"
+            android:inputType="date"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/evTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter Event Time (Military Time)"
+            android:inputType="time"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/evDescr"
+            android:layout_width="match_parent"
+            android:layout_height="121dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Enter Event Description"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/finalizeEvent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CREATE" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
