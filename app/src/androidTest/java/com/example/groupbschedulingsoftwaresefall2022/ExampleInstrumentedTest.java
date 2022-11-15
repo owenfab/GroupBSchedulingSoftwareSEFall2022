@@ -15,7 +15,6 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-@RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() {
@@ -23,4 +22,18 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.example.groupbschedulingsoftwaresefall2022", appContext.getPackageName());
     }
+
+    @Test
+    public void test1() {
+        Event e1 = new Event();
+        e1.setEventName("Test Event");
+        e1.setEventDescription("This is a test event description!");
+        e1.setMonth(11);
+        e1.setDay(13);
+        e1.setHour(9);
+        e1.setMinute(4);
+        e1.setDuration(10);
+        System.out.println(e1.toString());
+    }
+
 }
