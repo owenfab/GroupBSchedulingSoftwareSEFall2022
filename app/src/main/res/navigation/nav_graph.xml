@@ -38,7 +38,10 @@
       tools:layout="@layout/schedulenamepopup">
 
         <action
-          android:id="@+id/action_SecondFragment_to_FirstFragment"
+          android:id="@+id/action_ScheduleNamePopup_to_SecondFragment"
           app:destination="@id/SecondFragment" />
+        <action
+          android:id="@+id/action_ScheduleNamePopup_to_FirstFragment"
+          app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>
