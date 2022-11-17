@@ -9,46 +9,37 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.groupbschedulingsoftwaresefall2022.databinding.FragmentSecondBinding;
+import com.example.groupbschedulingsoftwaresefall2022.databinding.FragmentLoginBinding;
 
-public class SecondFragment extends Fragment {
 
-    private FragmentSecondBinding binding;
-
+public class LoginFragment extends Fragment {
+    private FragmentLoginBinding binding;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
+        binding = FragmentLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
-
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.fragSecondReturn.setOnClickListener(new View.OnClickListener() {
+
+
+        binding.newUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
-            }
-        });
-        binding.submitschedf2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                    .navigate(R.id.action_SecondFragment_to_calendarView2);
+                NavHostFragment.findNavController(LoginFragment.this)
+                        .navigate(R.id.action_ScheduleNamePopup_to_SecondFragment);
             }
         });
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 }
