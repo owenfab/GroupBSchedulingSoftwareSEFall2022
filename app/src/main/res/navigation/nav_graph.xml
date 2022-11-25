@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment2"
-        android:name="com.example.groupbschedulingsoftwaresefall2022.ui.login.LoginFragment2"
+        android:name="com.example.groupbschedulingsoftwaresefall2022.LoginFragment"
         android:label="fragment_login2"
         tools:layout="@layout/fragment_login2" >
         <action
