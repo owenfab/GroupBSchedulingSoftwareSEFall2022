@@ -9,18 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.groupbschedulingsoftwaresefall2022.databinding.FragmentLoginBinding;
+import com.example.groupbschedulingsoftwaresefall2022.databinding.FragmentLogin2Binding;
 
 
 public class LoginFragment extends Fragment {
-    private FragmentLoginBinding binding;
+    private FragmentLogin2Binding binding;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentLoginBinding.inflate(inflater, container, false);
+        binding = FragmentLogin2Binding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -29,11 +29,11 @@ public class LoginFragment extends Fragment {
 
 
 
-        binding.newUserButton.setOnClickListener(new View.OnClickListener() {
+        binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(LoginFragment.this)
-                        .navigate(R.id.action_ScheduleNamePopup_to_SecondFragment);
+                        .navigate(R.id.action_loginFragment2_to_calendarView2);
             }
         });
     }
