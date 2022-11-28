@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:hint="Enter Event Name"
+            android:hint="@string/event_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <EditText
@@ -25,17 +25,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Enter Event Date"
-            android:inputType="date"
+            android:hint="@string/event_date"
+            android:inputType="number"
             android:minHeight="48dp" />
 
         <EditText
-            android:id="@+id/evTime"
+            android:id="@+id/evMonth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Enter Event Time (Military Time)"
-            android:inputType="time"
+            android:hint="@string/event_month"
+            android:inputType="number"
+            android:minHeight="48dp"/>
+
+        <EditText
+            android:id="@+id/evHour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/event_hour"
+            android:inputType="number"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/evMin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/event_minute"
+            android:inputType="number"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/evDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/event_duration"
+            android:inputType="number"
             android:minHeight="48dp" />
 
         <EditText
@@ -44,14 +71,14 @@
             android:layout_height="121dp"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Enter Event Description"
+            android:hint="@string/event_description"
             android:inputType="textMultiLine" />
 
         <Button
             android:id="@+id/finalizeEvent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="CREATE" />
+            android:layout_height="76dp"
+            android:text="@string/create" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

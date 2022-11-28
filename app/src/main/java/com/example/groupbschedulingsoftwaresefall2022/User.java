@@ -2,20 +2,17 @@ package com.example.groupbschedulingsoftwaresefall2022;
 
 public class User {
 
-    private static int overallID = 0;
-    private int userID;
+    private String userID;
     private String email;
+    private String password;
 
-    public User(String email) {
-        userID = getUniqueID();
+    public User(String userID, String email, String password) {
+        this.userID = userID;
         this.email = email;
+        this.password = password;
     }
 
-    private int getUniqueID() {
-        return overallID++;
-    }
-
-    public int getUserID() {
+    public String getUserID() {
         return this.userID;
     }
 

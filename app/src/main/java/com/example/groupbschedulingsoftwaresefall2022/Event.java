@@ -1,22 +1,29 @@
 package com.example.groupbschedulingsoftwaresefall2022;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Event {
 
-    private static int overallID = 0;
     private int eventID;
     private Calendar eventDate;
     private String eventName;
     private String eventDescription;
     private int duration;
+    private String username;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -30,15 +37,17 @@ public class Event {
      * @param d duration of the event in minutes
      * @param eName name of the event
      * @param eDr description of the event
+     * @param username name of the user creating the Event; this is needed to properly reference
+     *                 the correct User in the DB.
      */
     public Event(int eMonth, int eDay, int eYear,
-                 int eHour, int eMin, int d, String eName, String eDr) {
-        eventID = getUniqueID();
+                 int eHour, int eMin, int d, String eName, String eDr, String username) {
         eventDate = Calendar.getInstance();
         eventDate.set(eYear, eMonth-1, eDay, eHour, eMin, 0);
         duration = d;
         eventName = eName;
         eventDescription = eDr;
+        this.username = username;
     }
 
     /**
@@ -46,11 +55,11 @@ public class Event {
      * this is still an event, just an empty one
      */
     public Event() {
-        eventID = getUniqueID();
         eventDate = Calendar.getInstance();
         duration = -1;
         eventName = "unknown";
         eventDescription = "unknown";
+        username = "unknown";
     }
 
     /**
@@ -59,7 +68,6 @@ public class Event {
      * @param e Event object to be copied
      */
     public Event(Event e) {
-        this.eventID = getUniqueID();
         this.eventDate = Calendar.getInstance();
         this.eventDate.set(e.eventDate.get(Calendar.YEAR), e.eventDate.get(Calendar.MONTH),
                 e.eventDate.get(Calendar.DATE), e.eventDate.get(Calendar.HOUR),
@@ -67,6 +75,7 @@ public class Event {
         this.duration = e.duration;
         this.eventName = e.eventName;
         this.eventDescription = e.eventDescription;
+        this.username = e.username;
     }
 
     /**
@@ -79,42 +88,39 @@ public class Event {
     /**
      * @return year of calling Event object
      */
-    public int getYear() {
+    public Integer getYear() {
         return this.eventDate.get(Calendar.YEAR);
     }
 
     /**
      * @return month of calling Event object
      */
-    public int getMonth() {
-        return this.eventDate.get(Calendar.MONTH);
-    }
-
+    public Integer getMonth() { return this.eventDate.get(Calendar.MONTH); }
     /**
      * @return day of calling Event object
      */
-    public int getDay() {
+    public Integer getDay() {
         return this.eventDate.get(Calendar.DATE);
     }
 
     /**
      * @return hour of calling Event object
      */
-    public int getHour() {
+    public Integer getHour() {
         return this.eventDate.get(Calendar.HOUR);
     }
 
     /**
      * @return minute of calling Event object
      */
-    public int getMinute() {
+    public Integer getMinute() {
         return this.eventDate.get(Calendar.MINUTE);
     }
 
     /**
      * @return duration of calling Event object
      */
-    public int getDuration() {
+    public Integer getDuration() {
         return this.duration;
     }
 
@@ -130,6 +136,13 @@ public class Event {
      */
     public String getEventDescription() {
         return this.eventDescription;
+    }
+
+    /**
+     * @return username associated with calling Event object
+     */
+    public String getUsername() {
+        return username;
     }
 
     /**
@@ -207,11 +220,11 @@ public class Event {
     }
 
     /**
-     * creates a unique ID by incrementing a value
-     * @return overallID++
+     * sets the associated username of calling Event object
+     * @param username
      */
-    private int getUniqueID() {
-        return overallID++;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -227,4 +240,32 @@ public class Event {
         return s;
     }
 
+    public void addEventDocument(Event e) {
+        Map<String, Object> entry = new HashMap<>();
+        entry.put("day", e.getDay());
+        entry.put("description", e.getEventDescription());
+        entry.put("duration", e.getDuration());
+        entry.put("hour", e.getHour());
+        entry.put("min", e.getMinute());
+        entry.put("month",e.getMonth());
+        entry.put("name", e.getEventName());
+        entry.put("userID", e.getUsername());
+        entry.put("year", e.getYear());
+
+        db.collection("events")
+                .add(entry)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot written with ID: "
+                                + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception k) {
+                        Log.w(TAG, "Error adding doc", k);
+                    }
+                });
+    }
 }
