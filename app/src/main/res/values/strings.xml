@@ -26,4 +26,6 @@
   <string name="event_minute">Enter Starting Minute</string>
   <string name="event_duration">Enter Event Duration (in minutes)</string>
   <string name="event_description">Enter Event Description</string>
+    <string name="Event_name">Event Name</string>
+    <string name="event_Name">Event Name</string>
 </resources>
