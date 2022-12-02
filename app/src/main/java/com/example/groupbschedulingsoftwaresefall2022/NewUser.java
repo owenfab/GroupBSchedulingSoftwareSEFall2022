@@ -2,11 +2,22 @@ package com.example.groupbschedulingsoftwaresefall2022;
 
 import android.os.Bundle;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +34,8 @@ public class NewUser extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
 
     public NewUser() {
         // Required empty public constructor
@@ -59,6 +72,22 @@ public class NewUser extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_new_user, container, false);
+        EditText newUserName = view.findViewById(R.id.editTextUsername);
+        Button createNewUser = view.findViewById(R.id.createacc_id);
+
+
+        createNewUser.setOnClickListener(new OnClickListener() {
+            @Override
+
+            public void onClick(View view) {
+                String str = newUserName.getText().toString();
+
+                User u_new = new User(str);
+                u_new.addUserDocument();
+            }
+        });
+
+    return view;
     }
 }

@@ -9,19 +9,21 @@
     android:background="@color/cardview_light_background">
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/username"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
-        app:layout_constraintBottom_toTopOf="@+id/createacc_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+      android:id="@+id/editTextUsername"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:autofillHints=""
+      android:ems="10"
+      android:hint="@string/username"
+      android:imeOptions="actionDone"
+      android:inputType="text"
+      android:minHeight="48dp"
+      android:singleLine="true"
+      android:textColorHint="#757575"
+      app:layout_constraintBottom_toTopOf="@+id/createacc_id"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/createacc_id"

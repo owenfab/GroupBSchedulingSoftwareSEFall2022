@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "533188453895",
+    "firebase_url": "https://groupbschedulingsoftware-default-rtdb.firebaseio.com",
     "project_id": "groupbschedulingsoftware",
     "storage_bucket": "groupbschedulingsoftware.appspot.com"
   },
