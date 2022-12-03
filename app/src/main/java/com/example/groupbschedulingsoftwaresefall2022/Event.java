@@ -24,6 +24,8 @@ public class Event {
     private String eventDescription;
     private int duration;
     private String username;
+    private String start;
+    private String end;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -36,18 +38,18 @@ public class Event {
      * @param eMin minute of the event
      * @param d duration of the event in minutes
      * @param eName name of the event
-     * @param eDr description of the event
      * @param username name of the user creating the Event; this is needed to properly reference
      *                 the correct User in the DB.
      */
     public Event(int eMonth, int eDay, int eYear,
-                 int eHour, int eMin, int d, String eName, String eDr, String username) {
+                 int eHour, int eMin, int d, String eName, String username, String start, String end) {
         eventDate = Calendar.getInstance();
         eventDate.set(eYear, eMonth-1, eDay, eHour, eMin, 0);
         duration = d;
         eventName = eName;
-        eventDescription = eDr;
         this.username = username;
+        this.start = start;
+        this.end = end;
     }
 
     /**
@@ -132,17 +134,24 @@ public class Event {
     }
 
     /**
-     * @return description of calling Event object
-     */
-    public String getEventDescription() {
-        return this.eventDescription;
-    }
-
-    /**
      * @return username associated with calling Event object
      */
     public String getUsername() {
         return username;
+    }
+
+    /**
+     * @return start associated with calling Event object
+     */
+    public String getStartTime() {
+        return start;
+    }
+
+    /**
+     * @return end associated with calling Event object
+     */
+    public String getEndTime() {
+        return end;
     }
 
     /**
@@ -212,14 +221,6 @@ public class Event {
     }
 
     /**
-     * sets the description of calling Event object
-     * @param description
-     */
-    public void setEventDescription(String description) {
-        this.eventDescription = description;
-    }
-
-    /**
      * sets the associated username of calling Event object
      * @param username
      */
@@ -242,19 +243,15 @@ public class Event {
 
     /**
      *
-     * @param e Event object you wish to create a Map of
      * @return Map usable to send to Firebase
      */
-    public Map<String, Object> createHashMapForTransfer(Event e) {
+    public Map<String, Object> createHashMapForTransfer() {
         Map<String, Object> input = new HashMap<>();
-        input.put("day", e.getDay());
-        input.put("duration", e.getDuration());
-        input.put("hour", e.getHour());
-        input.put("min", e.getMinute());
-        input.put("month", e.getMonth()+1);
-        input.put("name", e.getEventName());
-        input.put("year", e.getYear());
-        input.put("associatedUser", e.getUsername());
+        input.put("day", this.getDay());
+        input.put("name", this.getEventName());
+        input.put("associatedUser", this.getUsername());
+        input.put("start time", this.getStartTime());
+        input.put("end time", this.getEndTime());
         return input;
     }
 
@@ -262,7 +259,7 @@ public class Event {
      *
      * @return Map with basically nothing in it
      */
-    public Map<String, Object> createDefaultMapForPlaceHolder() {
+    public static Map<String, Object> createDefaultMapForPlaceHolder() {
         Map<String, Object> inputMap = new HashMap<>();
         inputMap.put("day", "today");
         return inputMap;
