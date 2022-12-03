@@ -240,32 +240,31 @@ public class Event {
         return s;
     }
 
-    public void addEventDocument(Event e) {
-        Map<String, Object> entry = new HashMap<>();
-        entry.put("day", e.getDay());
-        entry.put("description", e.getEventDescription());
-        entry.put("duration", e.getDuration());
-        entry.put("hour", e.getHour());
-        entry.put("min", e.getMinute());
-        entry.put("month",e.getMonth());
-        entry.put("name", e.getEventName());
-        entry.put("userID", e.getUsername());
-        entry.put("year", e.getYear());
+    /**
+     *
+     * @param e Event object you wish to create a Map of
+     * @return Map usable to send to Firebase
+     */
+    public Map<String, Object> createHashMapForTransfer(Event e) {
+        Map<String, Object> input = new HashMap<>();
+        input.put("day", e.getDay());
+        input.put("duration", e.getDuration());
+        input.put("hour", e.getHour());
+        input.put("min", e.getMinute());
+        input.put("month", e.getMonth()+1);
+        input.put("name", e.getEventName());
+        input.put("year", e.getYear());
+        input.put("associatedUser", e.getUsername());
+        return input;
+    }
 
-        db.collection("events")
-                .add(entry)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot written with ID: "
-                                + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception k) {
-                        Log.w(TAG, "Error adding doc", k);
-                    }
-                });
+    /**
+     *
+     * @return Map with basically nothing in it
+     */
+    public Map<String, Object> createDefaultMapForPlaceHolder() {
+        Map<String, Object> inputMap = new HashMap<>();
+        inputMap.put("day", "today");
+        return inputMap;
     }
 }
