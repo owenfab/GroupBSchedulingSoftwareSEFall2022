@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <CalendarView
         android:id="@+id/calendarViewId"
@@ -31,6 +30,42 @@
         android:ems="10"
         android:hint="@string/event_Name"
         android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="@string/Event_name" />
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/startTimeEditText"
+        android:layout_width="183dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="475dp"
+        android:ems="10"
+        android:hint="@string/event_start_time"
+        android:inputType="time"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/endTimeEditText"
+        android:layout_width="183dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="205dp"
+        android:layout_marginTop="475dp"
+        android:ems="10"
+        android:hint="@string/event_end_time"
+        android:inputType="time"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/selectedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="360dp"
+        android:text="@string/selected_date" />
+    <TextView
+        android:id="@+id/selectedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="360dp" />
+
 </RelativeLayout>
