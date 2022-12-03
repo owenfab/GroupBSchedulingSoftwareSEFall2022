@@ -1,5 +1,6 @@
 package com.example.groupbschedulingsoftwaresefall2022;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.text.Editable;
@@ -15,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,21 +38,12 @@ public class NewUser extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
+    Button back;
 
     public NewUser() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NewUser.
-     */
-    // TODO: Rename and change types and number of parameters
     public static NewUser newInstance(String param1, String param2) {
         NewUser fragment = new NewUser();
         Bundle args = new Bundle();
@@ -75,7 +69,15 @@ public class NewUser extends Fragment {
         View view = inflater.inflate(R.layout.fragment_new_user, container, false);
         EditText newUserName = view.findViewById(R.id.editTextUsername);
         Button createNewUser = view.findViewById(R.id.createacc_id);
+        back = (Button)view.findViewById(R.id.back_button);
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent backToLogin = new Intent(getActivity(), LoginActivity.class);
+                requireActivity().startActivity(backToLogin);
+            }
+        });
 
         createNewUser.setOnClickListener(new OnClickListener() {
             @Override
@@ -84,7 +86,14 @@ public class NewUser extends Fragment {
                 String str = newUserName.getText().toString();
 
                 User u_new = new User(str);
-                u_new.addUserDocument();
+                try {
+                    u_new.addUserDocument();
+                    Toast.makeText(getActivity(), "Username Registered!",
+                            Toast.LENGTH_LONG).show();
+                } catch(Exception ex) {
+                    Toast.makeText(getActivity(), "Task failed; please try again",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
 
