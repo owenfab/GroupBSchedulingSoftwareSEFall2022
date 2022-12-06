@@ -34,6 +34,7 @@ public class calendarView extends AppCompatActivity {
     private SQLiteDatabase sqLiteDatabase;
 
     private Button createButton;
+    private Button viewButton;
 
     private FirebaseFirestore fb;
 
@@ -60,6 +61,8 @@ public class calendarView extends AppCompatActivity {
 
         calendarView = (CalendarView)findViewById(R.id.calendarViewId);
         createButton = (Button)findViewById(R.id.buttonCreate);
+        viewButton = (Button)findViewById(R.id.viewButton);
+
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -91,6 +94,17 @@ public class calendarView extends AppCompatActivity {
                     Toast.makeText(calendarView.this, "Error; try again",
                             Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        viewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toDVActivity = new Intent(calendarView.this, DayViewActivity.class);
+                toDVActivity.putExtra("username", username);
+                toDVActivity.putExtra("selectedDay", evday);
+                toDVActivity.putExtra("selectedMonth", evmonth);
+                toDVActivity.putExtra("selectedYear", evyear);
+                calendarView.this.startActivity(toDVActivity);
             }
         });
 
