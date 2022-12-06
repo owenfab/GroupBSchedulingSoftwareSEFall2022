@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="240dp"
         android:layout_marginTop="310dp"
-        android:text="VIEW" />
+        android:text="@string/view" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
@@ -38,7 +38,8 @@
         android:ems="10"
         android:hint="@string/event_Name"
         android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColorHint="#757575" />
 
     <EditText
         android:id="@+id/startTimeEditText"
@@ -49,7 +50,9 @@
         android:ems="10"
         android:hint="@string/event_start_time"
         android:inputType="time"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/endTimeEditText"
@@ -60,7 +63,9 @@
         android:ems="10"
         android:hint="@string/event_end_time"
         android:inputType="time"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/selectedText"
