@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ public class calendarView extends AppCompatActivity {
 
     private Button createButton;
     private Button viewButton;
+    private Button logoutButton;
 
     private FirebaseFirestore fb;
 
@@ -63,6 +65,15 @@ public class calendarView extends AppCompatActivity {
         createButton = (Button)findViewById(R.id.buttonCreate);
         viewButton = (Button)findViewById(R.id.viewButton);
 
+        logoutButton = (Button)findViewById(R.id.logout_button);
+
+        logoutButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toLoginActivity = new Intent(calendarView.this,LoginActivity.class);
+                calendarView.this.startActivity(toLoginActivity);
+            }
+        });
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override

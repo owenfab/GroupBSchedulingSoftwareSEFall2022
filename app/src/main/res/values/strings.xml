@@ -37,4 +37,5 @@
     <string name="back">Back</string>
     <string name="selected_date">Selected date:</string>
     <string name="view">VIEW</string>
+  <string name="log_out">Logout</string>
 </resources>
