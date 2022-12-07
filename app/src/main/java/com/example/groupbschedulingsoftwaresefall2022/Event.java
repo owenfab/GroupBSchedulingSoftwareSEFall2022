@@ -97,7 +97,7 @@ public class Event {
     /**
      * @return month of calling Event object
      */
-    public Integer getMonth() { return this.eventDate.get(Calendar.MONTH); }
+    public Integer getMonth() { return this.eventDate.get(Calendar.MONTH)+1; }
     /**
      * @return day of calling Event object
      */
@@ -252,6 +252,8 @@ public class Event {
         input.put("associatedUser", this.getUsername());
         input.put("start time", this.getStartTime());
         input.put("end time", this.getEndTime());
+        input.put("year", this.getYear());
+        input.put("month", this.getMonth());
         return input;
     }
 
