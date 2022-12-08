@@ -84,6 +84,7 @@ public class calendarView extends AppCompatActivity {
                 evmonth = month;
                 evday = dayOfMonth;
                 dateViewed.setText(year + " " + (month+1) + " " + dayOfMonth);
+                ReadDatabase(view);
             }
         });
 
