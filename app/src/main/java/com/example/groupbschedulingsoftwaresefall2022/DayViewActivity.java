@@ -2,11 +2,17 @@ package com.example.groupbschedulingsoftwaresefall2022;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.PopupMenu;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
+import androidx.recyclerview.widget.RecyclerView.SimpleOnItemTouchListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import android.widget.Toast;
@@ -24,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DayViewActivity extends AppCompatActivity {
+public class  DayViewActivity extends AppCompatActivity {
 
     private RecyclerView eventDay;
     private ArrayList<Event> eventArrayList;
@@ -55,6 +61,9 @@ public class DayViewActivity extends AppCompatActivity {
         dayAdapter = new DayAdapter(eventArrayList, this);
 
 
+
+
+
         CollectionReference eventRef = fb.collection("Event");
         eventRef.whereEqualTo("associatedUser", username);
         eventRef.whereEqualTo("day", day);
@@ -62,6 +71,35 @@ public class DayViewActivity extends AppCompatActivity {
         eventRef.whereEqualTo("year", year);
 
         eventDay.setAdapter(dayAdapter);
+        eventDay.addOnItemTouchListener(new OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                PopupMenu event_menu = new PopupMenu(DayViewActivity.this, eventDay);
+                event_menu.getMenuInflater().inflate(R.menu.event_menu, event_menu.getMenu());
+                event_menu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        if(menuItem.getTitle().equals(R.string.edit_label)) {
+                            returnButton.setVisibility(View.GONE);
+                            eventDay.setVisibility(View.GONE);
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, new EditFragment()).commit();
+
+                        }
+                        return true;
+                    }
+                });
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
 
         eventRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
