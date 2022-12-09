@@ -88,7 +88,7 @@ public class calendarView extends AppCompatActivity {
                 evmonth = month;
                 evday = dayOfMonth;
                 dateViewed.setText(year + " " + (month+1) + " " + dayOfMonth);
-                String existingText = ReadDatabase(view);
+                ReadDatabase(view);
 
 
             }
@@ -153,17 +153,13 @@ public class calendarView extends AppCompatActivity {
         try{
             Cursor cursor = sqLiteDatabase.rawQuery(query, null);
             if(cursor!=null){
-                cursor.moveToFirst();
-                System.err.println("ReadDatabase count: "+cursor.getCount());
-                if(cursor.getCount()>0){
-                    String existingText;
-                    for(cursor){
-                        cursor.getString()
-                        existingText
-
+                    String existingText="";
+                    if(cursor.moveToFirst()){
+                        do {
+                            existingText+=cursor.getString(0)+"\n";
+                        }while(cursor.moveToNext());
                     }
                     textView2.setText("Events: "+existingText);
-                }
             }else{
                 System.err.println("cursor is null ");
             }
