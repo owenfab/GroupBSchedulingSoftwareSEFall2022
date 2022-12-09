@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.groupbschedulingsoftwaresefall2022.Event;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.Map;
 
 public class calendarView extends AppCompatActivity {
@@ -25,6 +26,7 @@ public class calendarView extends AppCompatActivity {
     private EditText editText;
     private EditText startTime;
     private EditText endTime;
+    private TextView textView2;
 
     private CalendarView calendarView;
 
@@ -66,6 +68,8 @@ public class calendarView extends AppCompatActivity {
         viewButton = (Button)findViewById(R.id.viewButton);
 
         logoutButton = (Button)findViewById(R.id.logout_button);
+//
+        textView2 = (TextView)findViewById(R.id.textView2);
 
         logoutButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -79,12 +83,14 @@ public class calendarView extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 selectedDate = Integer.toString(year) + month + dayOfMonth;
-                System.out.print("selectedDate: "+selectedDate);
+                System.err.println("selectedDate: "+selectedDate);
                 evyear = year;
                 evmonth = month;
                 evday = dayOfMonth;
                 dateViewed.setText(year + " " + (month+1) + " " + dayOfMonth);
-                ReadDatabase(view);
+                String existingText = ReadDatabase(view);
+
+
             }
         });
 
@@ -102,6 +108,8 @@ public class calendarView extends AppCompatActivity {
                     fb.collection("events").document(name).set(entry);
                     Toast.makeText(calendarView.this, "Success!",
                             Toast.LENGTH_SHORT).show();
+
+                    InsertDatabase(name,selectedDate);
                 } catch (Exception ex) {
                     Toast.makeText(calendarView.this, "Error; try again",
                             Toast.LENGTH_SHORT).show();
@@ -131,24 +139,37 @@ public class calendarView extends AppCompatActivity {
         }
     }
 
-    public void InsertDatabase(View view){
+    public void InsertDatabase(String name, String selectedDate){
         ContentValues contentValues = new ContentValues();
         contentValues.put("Date",selectedDate);
-        contentValues.put("Event", editText.getText().toString());
-        sqLiteDatabase.insert("EventCalendar", null, contentValues);
-
+        contentValues.put("Event", name);
+        long value = sqLiteDatabase.insert("EventCalendar", null, contentValues);
+        System.err.println("InsertDatabase value: "+value+" : "+selectedDate+" : "+name);
     }
 
     public void ReadDatabase(View view){
+        System.err.println("ReadDatabase selectedDate: .... "+selectedDate);
         String query = "Select Event from EventCalendar where Date = " + selectedDate;
         try{
             Cursor cursor = sqLiteDatabase.rawQuery(query, null);
-            cursor.moveToFirst();
-            editText.setText(cursor.getString(0));
+            if(cursor!=null){
+                cursor.moveToFirst();
+                System.err.println("ReadDatabase count: "+cursor.getCount());
+                if(cursor.getCount()>0){
+                    String existingText;
+                    for(cursor){
+                        cursor.getString()
+                        existingText
+
+                    }
+                    textView2.setText("Events: "+existingText);
+                }
+            }else{
+                System.err.println("cursor is null ");
+            }
         }
         catch (Exception e){
             e.printStackTrace();
-            editText.setText("");
         }
     }
 
