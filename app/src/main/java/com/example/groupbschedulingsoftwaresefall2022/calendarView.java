@@ -132,7 +132,7 @@ public class calendarView extends AppCompatActivity {
 
             dbHandler = new mySQLiteDBHandler(this, "CalendarDatabase", null,1);
             sqLiteDatabase = dbHandler.getWritableDatabase();
-            sqLiteDatabase.execSQL("CREATE TABLE EventCalendar(Date TEXT, Event TEXT)");
+            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS EventCalendar(Date TEXT, Event TEXT)");
         }
         catch (Exception e){
             e.printStackTrace();

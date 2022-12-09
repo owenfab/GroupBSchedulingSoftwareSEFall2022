@@ -64,7 +64,7 @@ public class  DayViewActivity extends AppCompatActivity {
 
 
 
-        CollectionReference eventRef = fb.collection("Event");
+        CollectionReference eventRef = fb.collection("events");
         eventRef.whereEqualTo("associatedUser", username);
         eventRef.whereEqualTo("day", day);
         eventRef.whereEqualTo("month", month);
