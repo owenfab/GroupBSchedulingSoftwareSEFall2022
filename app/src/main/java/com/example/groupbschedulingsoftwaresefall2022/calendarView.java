@@ -68,7 +68,7 @@ public class calendarView extends AppCompatActivity {
         viewButton = (Button)findViewById(R.id.viewButton);
 
         logoutButton = (Button)findViewById(R.id.logout_button);
-//
+
         textView2 = (TextView)findViewById(R.id.textView2);
 
         logoutButton.setOnClickListener(new OnClickListener() {
@@ -89,8 +89,6 @@ public class calendarView extends AppCompatActivity {
                 evday = dayOfMonth;
                 dateViewed.setText(year + " " + (month+1) + " " + dayOfMonth);
                 ReadDatabase(view);
-
-
             }
         });
 
@@ -122,7 +120,7 @@ public class calendarView extends AppCompatActivity {
                 Intent toDVActivity = new Intent(calendarView.this, DayViewActivity.class);
                 toDVActivity.putExtra("username", username);
                 toDVActivity.putExtra("selectedDay", evday);
-                toDVActivity.putExtra("selectedMonth", evmonth);
+                toDVActivity.putExtra("selectedMonth", evmonth+1);
                 toDVActivity.putExtra("selectedYear", evyear);
                 calendarView.this.startActivity(toDVActivity);
             }

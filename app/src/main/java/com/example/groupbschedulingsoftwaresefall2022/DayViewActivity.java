@@ -47,9 +47,9 @@ public class  DayViewActivity extends AppCompatActivity {
         //get username and day data from CalendarView
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
-        int day =  intent.getIntExtra("selectedDay", 0);
-        int month =  intent.getIntExtra("selectedMonth", 0);
-        int year =  intent.getIntExtra("selectedYear", 0);
+        long day =  intent.getIntExtra("selectedDay", 0);
+        long month =  intent.getIntExtra("selectedMonth", 0);
+        long year =  intent.getIntExtra("selectedYear", 0);
 
         eventDay = findViewById(R.id.idDayEventViews);
         returnButton = (Button)findViewById(R.id.returnButton);
@@ -59,10 +59,6 @@ public class  DayViewActivity extends AppCompatActivity {
         eventDay.setLayoutManager(new LinearLayoutManager(this));
 
         dayAdapter = new DayAdapter(eventArrayList, this);
-
-
-
-
 
         CollectionReference eventRef = fb.collection("events");
         eventRef.whereEqualTo("associatedUser", username);
@@ -106,11 +102,36 @@ public class  DayViewActivity extends AppCompatActivity {
                 if (!queryDocumentSnapshots.isEmpty()) {
                     List<DocumentSnapshot> docList = queryDocumentSnapshots.getDocuments();
                     for (DocumentSnapshot d : docList) {
+                        String user = (String)d.get("associatedUser");
+                        System.out.println("before if");
+                        System.out.println("day" + day + " month " + month + " year " + year);
+                         if ((long)d.get("day") == day && (long)d.get("month") == month
+                                 && (long)d.get("year") == year && user.equals(username)) {
+                             String evName = (String)d.get("name");
+                             String start = (String)d.get("start time");
+                             String end = (String)d.get("end time");
+                             System.out.println("name: " + evName);
+                             System.out.println("associatedUser: " + d.get("associatedUser"));
+                             System.out.println("start time: " + d.get("start time"));
+                             System.out.println("end time: " + d.get("end time"));
+                             System.out.println("day: " + d.get("day") + " " + d.get("month") + " " + d.get("year"));
+
+                             //make into object
+                             Event e = new Event(0,0,0,0,0,0,
+                                     evName,username,start, end);
+                             eventArrayList.add(e);
+                         }
+                        /*
                         Event e = d.toObject(Event.class);
-                        eventArrayList.add(e);
+                        System.out.println(e.toString());
+
+                         */
+                        //eventArrayList.add(e);
+
                     }
                     dayAdapter.notifyDataSetChanged();
-                } else {
+                }
+                else {
                     Toast.makeText(DayViewActivity.this, "No data found in db", Toast.LENGTH_SHORT).show();
                 }
             }

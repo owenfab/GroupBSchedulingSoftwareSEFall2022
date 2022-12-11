@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.PropertyName;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -18,16 +19,17 @@ import java.util.Map;
 
 public class Event {
 
-    private int eventID;
     private Calendar eventDate;
-    private String eventName;
+    @PropertyName("name")
+    private String name;
     private String eventDescription;
     private int duration;
+    @PropertyName("associatedUser")
     private String username;
+    @PropertyName("start time")
     private String start;
+    @PropertyName("end time")
     private String end;
-
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     /**
      * fully loaded Event constructor
@@ -46,7 +48,7 @@ public class Event {
         eventDate = Calendar.getInstance();
         eventDate.set(eYear, eMonth-1, eDay, eHour, eMin, 0);
         duration = d;
-        eventName = eName;
+        name = eName;
         this.username = username;
         this.start = start;
         this.end = end;
@@ -59,9 +61,11 @@ public class Event {
     public Event() {
         eventDate = Calendar.getInstance();
         duration = -1;
-        eventName = "unknown";
+        name = "unknown";
         eventDescription = "unknown";
         username = "unknown";
+        start = "unknown";
+        end = "unknown";
     }
 
     /**
@@ -75,16 +79,9 @@ public class Event {
                 e.eventDate.get(Calendar.DATE), e.eventDate.get(Calendar.HOUR),
                 e.eventDate.get(Calendar.MINUTE), 0);
         this.duration = e.duration;
-        this.eventName = e.eventName;
+        this.name = e.name;
         this.eventDescription = e.eventDescription;
         this.username = e.username;
-    }
-
-    /**
-     * @return ID of calling Event object
-     */
-    public int getID() {
-        return this.eventID;
     }
 
     /**
@@ -130,7 +127,7 @@ public class Event {
      * @return name of calling Event object
      */
     public String getEventName() {
-        return this.eventName;
+        return this.name;
     }
 
     /**
@@ -216,16 +213,28 @@ public class Event {
      * sets the name of calling Event object
      * @param name
      */
-    public void setEventName(String name) {
-        this.eventName = name;
+    @PropertyName("associatedUser")
+    public void setname(String name) {
+        this.name = name;
     }
 
     /**
      * sets the associated username of calling Event object
      * @param username
      */
-    public void setUsername(String username) {
+    @PropertyName("associatedUser")
+    public void setUser(String username) {
         this.username = username;
+    }
+
+    @PropertyName("start time")
+    public void setStart(String time) {
+        this.start = time;
+    }
+
+    @PropertyName("end time")
+    public void setEnd(String time) {
+        this.end = time;
     }
 
     /**
@@ -235,7 +244,7 @@ public class Event {
     @Override public String toString() {
         String s = "";
         //add eventDate info
-        s += "eventID: " + this.eventID + "\nevent name: " + this.eventName + "\nevent date: "
+        s += "event name: " + this.name + "\nevent date: "
                 + this.eventDate.getTime() + "\nevent duration: " + this.duration
                 + "\nevent description: " + this.eventDescription;
         return s;
