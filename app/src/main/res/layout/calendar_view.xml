@@ -2,7 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="411dp"
+        android:layout_height="730dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <CalendarView
         android:id="@+id/calendarViewId"
@@ -24,9 +32,17 @@
         android:id="@+id/viewButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="310dp"
         android:text="@string/view" />
+
+    <Button
+        android:id="@+id/viewShared"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="235dp"
+        android:layout_marginTop="310dp"
+        android:text="@string/view_shared" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
@@ -84,7 +100,9 @@
       android:id="@+id/logout_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/log_out" />
+      android:text="@string/log_out"
+      android:layout_marginStart="15dp"
+      android:layout_marginTop="650dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -96,5 +114,14 @@
         android:minHeight="50dp"
         android:text="@string/events"
         android:textColorLink="#3C3F41" />
+
+    <Button
+        android:id="@+id/buttonShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="650dp"
+        android:text="@string/share_label"
+        tools:visibility="visible" />
 
 </RelativeLayout>

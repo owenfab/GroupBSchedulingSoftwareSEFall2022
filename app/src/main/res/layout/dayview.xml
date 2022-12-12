@@ -15,8 +15,16 @@
         android:id="@+id/returnButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="670dp"
         android:text="@string/back" />
+
+    <Button
+        android:id="@+id/acceptButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/accept"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="670dp"/>
 
 </RelativeLayout>

@@ -82,6 +82,8 @@ public class Event {
         this.name = e.name;
         this.eventDescription = e.eventDescription;
         this.username = e.username;
+        this.start = e.start;
+        this.end = e.end;
     }
 
     /**

@@ -16,7 +16,6 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder>{
         private ArrayList<Event> eventsArrList;
         private Context content;
 
-
         //constructor for adapter class
         public DayAdapter(ArrayList<Event> eventsArrList, Context content) {
             this.eventsArrList = eventsArrList;
@@ -57,6 +56,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ViewHolder>{
                 eventStartTime = itemView.findViewById(R.id.idStartTime);
                 eventEndTime = itemView.findViewById(R.id.idEndTime);
             }
+
         }
     }
 

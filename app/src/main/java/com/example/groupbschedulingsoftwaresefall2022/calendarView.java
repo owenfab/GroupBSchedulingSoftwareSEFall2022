@@ -16,6 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.groupbschedulingsoftwaresefall2022.Event;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
@@ -27,6 +31,7 @@ public class calendarView extends AppCompatActivity {
     private EditText startTime;
     private EditText endTime;
     private TextView textView2;
+    private TextView selectText;
 
     private CalendarView calendarView;
 
@@ -39,6 +44,8 @@ public class calendarView extends AppCompatActivity {
     private Button createButton;
     private Button viewButton;
     private Button logoutButton;
+    private Button shareButton;
+    private Button sharedWithMe;
 
     private FirebaseFirestore fb;
 
@@ -66,10 +73,12 @@ public class calendarView extends AppCompatActivity {
         calendarView = (CalendarView)findViewById(R.id.calendarViewId);
         createButton = (Button)findViewById(R.id.buttonCreate);
         viewButton = (Button)findViewById(R.id.viewButton);
-
+        shareButton = (Button)findViewById(R.id.buttonShare);
+        sharedWithMe = (Button)findViewById(R.id.viewShared);
         logoutButton = (Button)findViewById(R.id.logout_button);
 
         textView2 = (TextView)findViewById(R.id.textView2);
+        selectText = (TextView)findViewById(R.id.selectedText);
 
         logoutButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -87,6 +96,7 @@ public class calendarView extends AppCompatActivity {
                 evyear = year;
                 evmonth = month;
                 evday = dayOfMonth;
+                System.out.println(evday + " " + evmonth + " " + evyear);
                 dateViewed.setText(year + " " + (month+1) + " " + dayOfMonth);
                 ReadDatabase(view);
             }
@@ -122,7 +132,54 @@ public class calendarView extends AppCompatActivity {
                 toDVActivity.putExtra("selectedDay", evday);
                 toDVActivity.putExtra("selectedMonth", evmonth+1);
                 toDVActivity.putExtra("selectedYear", evyear);
+                toDVActivity.putExtra("day", evday);
+                toDVActivity.putExtra("month", evmonth);
+                toDVActivity.putExtra("year", evyear);
+                toDVActivity.putExtra("mode", "view");
                 calendarView.this.startActivity(toDVActivity);
+            }
+        });
+
+        sharedWithMe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toDVActivity = new Intent(calendarView.this, DayViewActivity.class);
+                toDVActivity.putExtra("username", username);
+                toDVActivity.putExtra("selectedDay", evday);
+                toDVActivity.putExtra("selectedMonth", evmonth+1);
+                toDVActivity.putExtra("selectedYear", evyear);
+                toDVActivity.putExtra("day", evday);
+                toDVActivity.putExtra("month", evmonth);
+                toDVActivity.putExtra("year", evyear);
+                toDVActivity.putExtra("mode", "share");
+                calendarView.this.startActivity(toDVActivity);
+            }
+        });
+
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendarView.setVisibility(View.GONE);
+                createButton.setVisibility(View.GONE);
+                viewButton.setVisibility(View.GONE);
+                editText.setVisibility(View.GONE);
+                startTime.setVisibility(View.GONE);
+                endTime.setVisibility(View.GONE);
+                endTime.setVisibility(View.GONE);
+                selectText.setVisibility(View.GONE);
+                dateViewed.setVisibility(View.GONE);
+                logoutButton.setVisibility(View.GONE);
+                textView2.setVisibility(View.GONE);
+                shareButton.setVisibility(View.GONE);
+                sharedWithMe.setVisibility(View.GONE);
+                Bundle bundle = new Bundle();
+                bundle.putInt("day", evday);
+                bundle.putInt("month", evmonth+1);
+                bundle.putInt("year", evyear);
+                bundle.putString("username", username);
+                ShareFragment frag = new ShareFragment();
+                frag.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, frag).commit();
             }
         });
 
@@ -166,5 +223,4 @@ public class calendarView extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 }
