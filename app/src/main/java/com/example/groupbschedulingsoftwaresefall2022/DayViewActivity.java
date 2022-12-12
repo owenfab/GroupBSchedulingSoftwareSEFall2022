@@ -174,8 +174,7 @@ public class  DayViewActivity extends AppCompatActivity {
                             System.out.println("day" + day + " month " + month + " year " + year);
                             if ((long) d.get("day") == day && (long) d.get("month") == month
                                     && (long) d.get("year") == year && user.equals(username)) {
-                                String evName = (String)d.get("name") + " (shared by " +
-                                        (String)d.get("associatedUser") + ")";
+                                String evName = (String)d.get("associatedUser") + "TO" + user + "EVENT" + (String)d.get("name");
                                 String start = (String) d.get("start time");
                                 String end = (String) d.get("end time");
                                 //make into object
@@ -226,6 +225,22 @@ public class  DayViewActivity extends AppCompatActivity {
                         Toast.makeText(DayViewActivity.this, "Error; try again",
                                 Toast.LENGTH_SHORT).show();
                     }
+                    fb.collection("shares").document(e.getEventName())
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(DayViewActivity.this, "Success!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(DayViewActivity.this, "Failure",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 }
             }
         });
