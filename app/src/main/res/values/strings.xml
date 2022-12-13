@@ -44,4 +44,11 @@
     <string name="what_event_would_you_like_to_send">What event would you like to send?</string>
     <string name="view_shared">Shared with me</string>
     <string name="accept">Accept</string>
+    <string name="submit">Submit</string>
+    <string name="Day">Day</string>
+    <string name="Month">Month</string>
+    <string name="Year">Year</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="enter_event_to_edit">Enter event to edit</string>
 </resources>

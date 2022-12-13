@@ -27,4 +27,30 @@
         android:layout_marginStart="160dp"
         android:layout_marginTop="670dp"/>
 
+    <EditText
+        android:id="@+id/editEnter"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="670dp"
+        android:ems="10"
+        android:hint="@string/enter_event_to_edit"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/EditEventButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="670dp"
+        android:text="@string/edit_label" />
+
+    <FrameLayout
+        android:id="@+id/fragContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
 </RelativeLayout>

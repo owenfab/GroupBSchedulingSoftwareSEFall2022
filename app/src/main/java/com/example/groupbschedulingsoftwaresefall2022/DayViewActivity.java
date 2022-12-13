@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,9 @@ public class  DayViewActivity extends AppCompatActivity {
 
     private Button returnButton;
     private Button acceptButton;
+    private Button editButton;
+
+    private EditText editEvent;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +65,16 @@ public class  DayViewActivity extends AppCompatActivity {
 
         returnButton = (Button)findViewById(R.id.returnButton);
         acceptButton = (Button)findViewById(R.id.acceptButton);
+        editButton = (Button)findViewById(R.id.EditEventButton);
+
+        editEvent = (EditText)findViewById(R.id.editEnter);
 
         if (mode.equals("view")) {
             acceptButton.setVisibility(View.GONE);
         } else if (mode.equals("share")) {
             acceptButton.setVisibility(View.VISIBLE);
+            editEvent.setVisibility(View.GONE);
+            editButton.setVisibility(View.GONE);
         }
 
         eventArrayList = new ArrayList<>();
@@ -209,6 +218,68 @@ public class  DayViewActivity extends AppCompatActivity {
                 Intent retCalActivity = new Intent(DayViewActivity.this, calendarView.class);
                 retCalActivity.putExtra("username", username);
                 DayViewActivity.this.startActivity(retCalActivity);
+            }
+        });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            Event eventFound;
+            @Override
+            public void onClick(View view) {
+                boolean exists = false;
+                eventFound = new Event();
+                String text = editEvent.getText().toString().trim();
+                //data integrity
+                //if field is empty
+                if (text.equals("")) {
+                    Toast.makeText(DayViewActivity.this, "Please enter an event name!",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    //otherwise check if this event exists
+                    for (Event e : eventArrayList) {
+                        if (e.getEventName().equals(text)) {
+                            eventFound = new Event(e);
+                            exists = true;
+                            break;
+                        }
+                    }
+                    if (!exists) {
+                        Toast.makeText(DayViewActivity.this,
+                                "Please enter an event in this day's list",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        //delete original event
+                        fb.collection("events").document(eventFound.getEventName())
+                                .delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        eventDay.setVisibility(View.GONE);
+                                        returnButton.setVisibility(View.GONE);
+                                        editEvent.setVisibility(View.GONE);
+                                        editButton.setVisibility(View.GONE);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("day", evday);
+                                        bundle.putInt("month", evmonth+1);
+                                        bundle.putInt("year", evyear);
+                                        bundle.putString("username", username);
+                                        bundle.putString("start time", eventFound.getStartTime());
+                                        bundle.putString("end time", eventFound.getEndTime());
+                                        bundle.putString("event name", eventFound.getEventName());
+                                        System.out.println("from dayView to editFragment; month: " + evmonth+1);
+                                        EditFragment frag = new EditFragment();
+                                        frag.setArguments(bundle);
+                                        getSupportFragmentManager().beginTransaction().replace(R.id.fragContainer, frag).commit();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(DayViewActivity.this, "Error; please try again",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                }
             }
         });
 

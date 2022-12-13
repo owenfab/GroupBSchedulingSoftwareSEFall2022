@@ -7,9 +7,22 @@
   android:layout_height="match_parent"
   tools:context=".EditFragment">
 
-  <!-- TODO: Update blank fragment layout -->
+  <TextView
+      android:id="@+id/edit"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/edit_label"
+      android:textColor="#673AB7"
+      android:textSize="34sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.045"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.083" />
+
   <EditText
-    android:id="@+id/editTextTextPersonName2"
+    android:id="@+id/editEventName"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:autofillHints=""
@@ -24,76 +37,113 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0.231" />
-  <TextView
-    android:id="@+id/textView3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/edit_label"
-    android:textSize="34sp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.045"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.083" />
+
   <EditText
-    android:id="@+id/editTextDate"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:ems="10"
-    android:hint="@string/event_date"
-    android:inputType="date"
-    android:minHeight="48dp"
-    android:textColorHint="#757575"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.079"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
-    app:layout_constraintVertical_bias="0.0"
-    android:autofillHints="" />
+      android:id="@+id/editStartTime"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="356dp"
+      android:autofillHints=""
+      android:ems="10"
+      android:hint="@string/event_start_time"
+      android:inputType="time"
+      android:minHeight="48dp"
+      android:textColorHint="#757575"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.079"
+      app:layout_constraintStart_toStartOf="parent" />
+
   <EditText
-    android:id="@+id/editTextTime"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:ems="10"
-    android:hint="@string/event_start_time"
-    android:inputType="time"
-    android:minHeight="48dp"
-    android:textColorHint="#757575"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.079"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/editTextDate"
-    app:layout_constraintVertical_bias="0.0"
-    android:autofillHints="" />
-  <EditText
-    android:id="@+id/editTextTime2"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:autofillHints=""
-    android:ems="10"
-    android:hint="@string/event_end_time"
-    android:inputType="time"
-    android:minHeight="48dp"
-    android:textColorHint="#757575"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.079"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.44" />
+      android:id="@+id/editEndTime"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:autofillHints=""
+      android:ems="10"
+      android:hint="@string/event_end_time"
+      android:inputType="time"
+      android:minHeight="48dp"
+      android:textColorHint="#757575"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.079"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.565" />
+
   <Button
-    android:id="@+id/EditEventButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/edit_label"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.883"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.953" />
+      android:id="@+id/submitButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/submit"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.95"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.799" />
+
+  <EditText
+      android:id="@+id/editDay"
+      android:layout_width="61dp"
+      android:layout_height="48dp"
+      android:layout_marginTop="264dp"
+      android:ems="10"
+      android:hint="@string/Day"
+      android:inputType="number"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.045"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <EditText
+      android:id="@+id/editMonth"
+      android:layout_width="61dp"
+      android:layout_height="48dp"
+      android:layout_marginTop="264dp"
+      android:ems="10"
+      android:hint="@string/Month"
+      android:inputType="number"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.254"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <EditText
+      android:id="@+id/editYear"
+      android:layout_width="61dp"
+      android:layout_height="48dp"
+      android:layout_marginTop="264dp"
+      android:ems="10"
+      android:hint="@string/Year"
+      android:inputType="number"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.471"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+      android:id="@+id/cancel_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/cancel"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/submitButton"
+      app:layout_constraintHorizontal_bias="0.075"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.799" />
+
+  <Button
+      android:id="@+id/delete_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/delete"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.799" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
